@@ -1,11 +1,11 @@
-class vehicle {
+class Vehicle {
     constructor(x,y) {
         this.position = createVector(x,y);
         this.velocity = createVector(0,0);
         this.acceleration = createVector(0,0)
 
         this.r = 6
-        this.maxpseed = 8;
+        this.maxspeed = 8;
         this.maxforce = 0.2
     }
 
@@ -29,7 +29,7 @@ class vehicle {
 
     // steer = desired - velociry to reach the target logic
     seek(target) {
-       let desired = p5.Vector.sub(target, this.postion)
+       let desired = p5.Vector.sub(target, this.position)
 
        // setting speed to mac
 

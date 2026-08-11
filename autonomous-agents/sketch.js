@@ -1,26 +1,23 @@
 let vehicle;
 
-
 function setup() {
-    createCanvas(640,240)
-    vehicle = new Vehicle(width /2 , height/2);
+  createCanvas(640, 240);
+  vehicle = new Vehicle(width / 2, height / 2);
 }
 
 function draw() {
-    backround(255)
+  background(255);
 
-    let mouse = createVector(mousex, mouseY);
+  let mouse = createVector(mouseX, mouseY);
 
-    // drawing an circle around the mouse
-    fill(127)
-    stroke(0)
-    strokeWeight(2)
-    circle(mouse.x, mouse.y, 48)
+  // Draw an ellipse at the mouse position
+  fill(127);
+  stroke(0);
+  strokeWeight(2);
+  circle(mouse.x, mouse.y, 48);
 
-
-    /// steering function calls
-
-    vehicle.seek(mouse);
-    vehicle.update();
-    vehicle.show();
+  // Call the appropriate steering behaviors for our agents
+  vehicle.seek(mouse);
+  vehicle.update();
+  vehicle.show();
 }
