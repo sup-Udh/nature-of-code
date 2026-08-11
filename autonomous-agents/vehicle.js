@@ -1,0 +1,59 @@
+class vehicle {
+    constructor(x,y) {
+        this.position = createVector(x,y);
+        this.velocity = createVector(0,0);
+        this.acceleration = createVector(0,0)
+
+        this.r = 6
+        this.maxpseed = 8;
+        this.maxforce = 0.2
+    }
+
+    // updating the location 
+
+    update() {
+        this.velocity.add(this.acceleration)
+
+        this.velocity.limit(this.maxspeed);
+
+        this.position.add(this.velocity);
+
+        this.acceleration.mult(0); 
+
+
+    }
+
+    applyForce(force) {
+        this.acceleration.add(force);
+    }
+
+    // steer = desired - velociry to reach the target logic
+    seek(target) {
+       let desired = p5.Vector.sub(target, this.postion)
+
+       // setting speed to mac
+
+       desired.setMag(this.maxspeed);
+
+
+       let steer = p5.Vector.sub(desired, this.velocity);
+       steer.limit(this.maxforce);
+
+       this.applyForce(steer);
+    
+    }
+    show() {
+ let angle = this.velocity.heading();
+    fill(127);
+    stroke(0);
+    push();
+    translate(this.position.x, this.position.y);
+    rotate(angle);
+    beginShape();
+    vertex(this.r * 2, 0);
+    vertex(-this.r * 2, -this.r);
+    vertex(-this.r * 2, this.r);
+    endShape(CLOSE);
+    pop();        
+    }
+}
