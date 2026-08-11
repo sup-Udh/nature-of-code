@@ -29,19 +29,23 @@ class Vehicle {
 
     // steer = desired - velociry to reach the target logic
     seek(target) {
-       let desired = p5.Vector.sub(target, this.position)
-
-       // setting speed to mac
-
-       desired.setMag(this.maxspeed);
-
-
-       let steer = p5.Vector.sub(desired, this.velocity);
-       steer.limit(this.maxforce);
-
-       this.applyForce(steer);
-    
+        let desired = p5.Vector.sub(target, this.position); // A vector pointing from the location to the target
+    let d = desired.mag();
+    // Scale with arbitrary damping within 100 pixels
+    if (d < 100) {
+      let m = map(d, 0, 100, 0, this.maxspeed);
+      desired.setMag(m);
+    } else {
+      desired.setMag(this.maxspeed);
     }
+
+    // Steering = Desired minus Velocity
+    let steer = p5.Vector.sub(desired, this.velocity);
+    steer.limit(this.maxforce);  // Limit to maximum steering force
+    this.applyForce(steer);
+    }
+
+
     show() {
  let angle = this.velocity.heading();
     fill(127);
